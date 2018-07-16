@@ -6,7 +6,7 @@ Before using the cloud, a user needs to be familar with certain concepts. Most o
 
 The highest management layer in the latest OpenStack releases are ''domains''. A domain is a collection of users, project, roles, role assignment, common configurations like quotas etc. The domain concept allow cloud providers to grant administrative privileges to certain users, and thus enable them to manage their "own" cloud instance.
 
-In the case of the BCF, a common domain for all BCF users called ''bcf'' is available. This domain is linked to the existing BCF authentication system, so all users with BCF UNIX accounts are able to access the ''bcf'' domain without any additional requirements like extra credentials.
+In the case of de.NBI, every cloud user needs an Elixir account and must be registered at the de.NBI cloud portal. 
 
 The domain concept also allows the creation of additional domains, e.g. for running a workshop with dedicated users . These domains can be created on request.
 
@@ -30,11 +30,25 @@ An *image* is the binary representation of a computer's hard disk and defines th
 
 Images may be associated to a project, or made publically available for all projects. Upon uploading an image the minimal requirements like hard disk size or available memory can be specified to ensure that the image is used with the right amount of resources.
 
+More information about images are in available in the [Image overview](images.md).
+
 ##### Flavor
 
-A *flavor* defines a virtual machine setup by defining parameters like hard disk size, available memory or CPU core number. The cloud provider an use flavors to optimize virtual machines for the available hardware. A flavor may also be used to restrict virtual machines to certain physical hosts, e.g. by requiring extra local storage or feature like a GPU.
+A *flavor* defines a virtual machine setup by defining parameters like hard disk size, available memory or CPU core number. The cloud provider use flavors to optimize virtual machines for the available hardware. A flavor may also be used to restrict virtual machines to certain physical hosts, e.g. by requiring extra local storage or feature like a GPU.
 
-Flavor are defined by the cloud providers; to request additional ones contact the BCF support.
+The following flavors are provided in *all* de.NBI cloud sites under the same name with the same resources. Flavors with ephemeral storage can *optionally* be provided if supported by the cloud center.
+The flavor name is the name of the "regular" de.NBI flavor with the postfix " + ephemeral", e.g. "de.NBI medium + ephemeral".  
+
+Name | # VCPUs | RAM \[GB] | Root disk \[GB] | Ephemeral disk \[GB] |
+---|---:|---:|---:|---:|
+de.NBI default | 2 | 4 | 20 | N/A
+de.NBI small | 8 | 16 | 20 | 50 |
+de.NBI medium | 16 | 32 | 20 | 150 |
+de.NBI large | 32 | 64 | 20 | 250 |
+
+Depending on the cloud site additional flavors are available according to the allocatable hardware (High Memory, GPU, FPGA, ...). 
+
+Other flavors will be provided as needed or requested.
 
 ##### Network
 
@@ -46,7 +60,7 @@ An instance is running virtual machine defined by an image (what to run), a flav
 
 ##### Volume
 
-Hard disks of virtual machines are not persistent. After the virtual machine is terminated, its hard disk's content is deleted and not available anymore. A volume in contrast provides a persistent way to store data. It is created separately from a virtual machine and attached to an instance at runtime. It may also be detached and attached to another instance at will. The volume acts a another block device from the point of view of the virtual machine, so users are not restricted to certain formats.
+Hard disks of virtual machines are not persistent. After the virtual machine is terminated, its hard disk's content is deleted and not available anymore. A volume in contrast provides a persistent way to store data. It is created separately from a virtual machine and attached to an instance at runtime. It may also be detached and attached to another instance at will. The volume acts as another block device from the point of view of the virtual machine, so users are not restricted to certain formats.
 
 In the current configuration, the same volume cannot be attached to multiple virtual machines (in the same way a physical hard disk can only be connected to one compute). To share the content of volume, snapshots can be made and different snapshots can be attached to different instances.
 
