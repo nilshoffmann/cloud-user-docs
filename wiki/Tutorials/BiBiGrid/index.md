@@ -92,12 +92,12 @@ cloud9: yes
 **credentials.yml:**
 
 ```
-tenantName: XXX
+projectName: XXX
 username: ELIXIRID@elixir-europe.org
 password: PASSWORD
 endpoint: https://openstack.cebitec.uni-bielefeld.de:5000/v3/
 domain: elixir
-tenantDomain: elixir
+projectDomain: elixir
 ```
 
 *The openstack credentials requires the **name** not the **id** .*
